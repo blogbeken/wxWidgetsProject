@@ -3,10 +3,10 @@
 ## any manual changes will be erased      
 ##
 ## Release
-ProjectName            :=SimpleWidget
+ProjectName            :=SimpleWidgetFB
 ConfigurationName      :=Release
 WorkspacePath          := "C:\myProject\wxWidgetsProject"
-ProjectPath            := "C:\myProject\wxWidgetsProject\SimpleWidget"
+ProjectPath            := "C:\myProject\wxWidgetsProject\SimpleWidgetFB"
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -28,11 +28,11 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=
+Preprocessors          :=$(PreprocessorSwitch)__WX__ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
-ObjectsFileList        :="SimpleWidget.txt"
+ObjectsFileList        :="SimpleWidgetFB.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := $(shell wx-config --rcflags)
@@ -65,7 +65,7 @@ CodeLiteDir:=C:\Program Files\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 WXWIN:=C:\wxWidgets-3.0.0
 WXCFG:=gcc_lib\mswu
-Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/gui$(ObjectSuffix) $(IntermediateDirectory)/main$(ObjectSuffix) 
 
 
 
@@ -92,8 +92,16 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/gui$(ObjectSuffix): gui.cpp $(IntermediateDirectory)/gui$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/myProject/wxWidgetsProject/SimpleWidgetFB/gui.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/gui$(DependSuffix): gui.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui$(ObjectSuffix) -MF$(IntermediateDirectory)/gui$(DependSuffix) -MM "gui.cpp"
+
+$(IntermediateDirectory)/gui$(PreprocessSuffix): gui.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui$(PreprocessSuffix) "gui.cpp"
+
 $(IntermediateDirectory)/main$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/myProject/wxWidgetsProject/SimpleWidget/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/myProject/wxWidgetsProject/SimpleWidgetFB/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main$(ObjectSuffix) -MF$(IntermediateDirectory)/main$(DependSuffix) -MM "main.cpp"
 
@@ -106,11 +114,14 @@ $(IntermediateDirectory)/main$(PreprocessSuffix): main.cpp
 ## Clean
 ##
 clean:
+	$(RM) $(IntermediateDirectory)/gui$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/gui$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/gui$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
-	$(RM) "../.build-release/SimpleWidget"
+	$(RM) "../.build-release/SimpleWidgetFB"
 
 

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="wxWidgetsProject" Database="">
-  <Project Name="SimpleWidget" Path="SimpleWidget/SimpleWidget.project" Active="Yes"/>
+  <Project Name="SimpleWidget" Path="SimpleWidget/SimpleWidget.project" Active="No"/>
   <Environment>
     <![CDATA[]]>
   </Environment>
+  <Project Name="SimpleWidgetFB" Path="SimpleWidgetFB/SimpleWidgetFB.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">
       <Project Name="SimpleWidget" ConfigName="Release"/>
+      <Project Name="SimpleWidgetFB" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="SimpleWidget" ConfigName="Release"/>
+      <Project Name="SimpleWidgetFB" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
